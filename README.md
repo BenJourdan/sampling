@@ -1,2 +1,2 @@
-# sampling
-A simple sampling tree implementation for sampling discrete distribtuions with sparse dynamic updates.
+# sampling-tree
+A simple sampling tree implementation for sampling discrete distributions with sparse dynamic updates.
