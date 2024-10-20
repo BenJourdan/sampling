@@ -4,7 +4,9 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-divan = "0.1.14"
+criterion = { version = "0.5.1", features = ["csv"] }
+human-units = "0.2.0"
+
 num = "0.4.3"
 rand = "0.8.5"
 
@@ -12,3 +14,21 @@ rand = "0.8.5"
 [[bench]]
 name = "simple"
 harness = false
+
+
+[profile.release]
+opt-level = 3
+lto = true
+
+
+[profile.bench]
+opt-level = 3
+lto = true
+
+[profile.test]
+opt-level = 3
+# lto = true
+
+
+[dev-dependencies]
+indicatif = "0.17.8"

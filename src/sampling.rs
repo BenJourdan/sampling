@@ -122,6 +122,12 @@ where N: Node
             true => Ok(Index(node_index))
         }
     }
+
+    pub fn get_contribution(&self, node_index: Index) -> Result<N::C,Error>{
+        let shifted_index = self.get_shifted_node_index(node_index)?;
+        Ok(self.storage[shifted_index.0].contribution())
+    }
+
     pub fn from_iterable<I>(mut iterator: I) ->Result<Self,Error>
     where I: Iterator<Item=N::C> + ExactSizeIterator
     {
