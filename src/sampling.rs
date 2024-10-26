@@ -49,7 +49,7 @@ impl From<usize> for ShiftedIndex{
 
 // MARK: NodeState enum
 #[derive(PartialEq)]
-enum NodeState{
+pub enum NodeState{
     Internal,
     Leaf
 }
