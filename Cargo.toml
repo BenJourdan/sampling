@@ -12,8 +12,8 @@ The memory footprint is no more than twice the size of `n*std::mem::size_of::<T>
 homepage = "https://github.com/BenJourdan/sampling-tree"
 repository = "https://github.com/BenJourdan/sampling-tree"
 readme = "README.md"
-keywords = ["sampling", "tree", "data-structures", "algorithms", "statistics", "sampling-tree"]
-categories = ["data-structures", "algorithms", "statistics"]
+keywords = ["sampling", "tree", "data-structures", "statistics", "sampling-tree"]
+categories = ["data-structures", "statistics"]
 
 [dependencies]
 criterion = { version = "0.5.1", features = ["csv"] }
