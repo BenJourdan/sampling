@@ -13,7 +13,7 @@ homepage = "https://github.com/BenJourdan/sampling-tree"
 repository = "https://github.com/BenJourdan/sampling-tree"
 readme = "README.md"
 keywords = ["sampling", "tree", "data-structures", "statistics", "sampling-tree"]
-categories = ["data-structures", "statistics"]
+categories = ["data-structures", "stats"]
 
 [dependencies]
 criterion = { version = "0.5.1", features = ["csv"] }
