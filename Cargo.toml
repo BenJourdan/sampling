@@ -2,6 +2,18 @@
 name = "sampling-tree"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
+description = """
+A simple sampling tree implementation for sampling discrete distributions with sparse dynamic updates.
+This allows us to sample efficiently from a distribution given the relative importance of each datapoint.
+Construction time is O(n), updating is O(log(n)), and sampling is O(log(n)).
+The memory footprint is no more than twice the size of `n*std::mem::size_of::<T>()` where `T` is weight datatype.
+"""
+homepage = "https://github.com/BenJourdan/sampling-tree"
+repository = "https://github.com/BenJourdan/sampling-tree"
+readme = "README.md"
+keywords = ["sampling", "tree", "data-structures", "algorithms", "statistics", "sampling-tree"]
+categories = ["data-structures", "algorithms", "statistics"]
 
 [dependencies]
 criterion = { version = "0.5.1", features = ["csv"] }

@@ -1,13 +1,13 @@
-use criterion::{criterion_group, criterion_main, Criterion, black_box, Throughput};
+use criterion::{black_box, criterion_group, criterion_main, Criterion, Throughput};
 use num::Zero;
-use rand::{Rng, SeedableRng};
 use rand::rngs::StdRng;
+use rand::{Rng, SeedableRng};
 use sampling_tree::SimpleSamplingTree;
 
 const TREE_SAMPLE_COUNT: usize = 1000;
 
 // Define multiple values of n
-static N_SIZES: &[usize] = &[32_768, 262_144, 1_048_576, 8_388_608,];
+static N_SIZES: &[usize] = &[32_768, 262_144, 1_048_576, 8_388_608];
 
 fn construct<H>(data: impl Iterator<Item = H> + std::iter::ExactSizeIterator)
 where
@@ -21,7 +21,7 @@ where
         + num::Zero
         + std::ops::AddAssign
         + std::ops::SubAssign
-        + From<u16>
+        + From<u16>,
 {
     let _sampling_tree = SimpleSamplingTree::from_iterable(data.into_iter()).unwrap();
 }
@@ -117,47 +117,33 @@ macro_rules! create_update_benchmarks {
     };
 }
 
-
 fn bench_all(c: &mut Criterion) {
     // Group for construction benchmarks
     let mut group_construct = c.benchmark_group("construct");
     create_construction_benchmarks!(group_construct, f64, u64);
-    group_construct.sampling_mode(
-        criterion::SamplingMode::Flat
-    );
+    group_construct.sampling_mode(criterion::SamplingMode::Flat);
     group_construct.sample_size(10);
     group_construct.nresamples(10);
-    group_construct.measurement_time(
-        std::time::Duration::from_secs(3)
-    );
+    group_construct.measurement_time(std::time::Duration::from_secs(3));
     group_construct.finish(); // Finish the construction group
 
     // Group for sampling benchmarks
     let mut group_sampling = c.benchmark_group("sampling");
-    group_sampling.throughput(Throughput::Elements(TREE_SAMPLE_COUNT as u64)); 
-    group_sampling.sampling_mode(
-        criterion::SamplingMode::Flat
-    );
+    group_sampling.throughput(Throughput::Elements(TREE_SAMPLE_COUNT as u64));
+    group_sampling.sampling_mode(criterion::SamplingMode::Flat);
     group_sampling.sample_size(10);
     group_sampling.nresamples(10);
-    group_sampling.measurement_time(
-        std::time::Duration::from_secs(3)
-    );
+    group_sampling.measurement_time(std::time::Duration::from_secs(3));
     create_sampling_benchmarks!(group_sampling, f64, u64);
     group_sampling.finish(); // Finish the sampling group
-
 
     // Group for update benchmarks
     let mut group_update = c.benchmark_group("update");
     group_update.throughput(Throughput::Elements(TREE_SAMPLE_COUNT as u64));
-    group_update.sampling_mode(
-        criterion::SamplingMode::Flat
-    );
+    group_update.sampling_mode(criterion::SamplingMode::Flat);
     group_update.sample_size(10);
     group_update.nresamples(10);
-    group_update.measurement_time(
-        std::time::Duration::from_secs(3)
-    );
+    group_update.measurement_time(std::time::Duration::from_secs(3));
     create_update_benchmarks!(group_update, f64, u64);
     group_update.finish(); // Finish the update group
 }
