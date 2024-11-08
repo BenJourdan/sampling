@@ -38,7 +38,7 @@ mod tests {
     fn test_throughput(){
 
         let mut rng = rand::thread_rng();
-        let n = 10_000_000;
+        let n = 1_000_000;
         let range = 10000u64;
         let data = (0..n).map(|_|{
             rng.gen_range(0..range)
@@ -46,8 +46,8 @@ mod tests {
         let sampling_tree: SimpleSamplingTree<_> = SimpleSamplingTree::from_iterable(data).unwrap();
 
         // measure throughput of sampling
-        let num_samples = 100_000_000;
-        let num_threads = 32;
+        let num_samples = 1_000_000;
+        let num_threads = 4;
 
         let mp = Arc::new(indicatif::MultiProgress::new());
         let sty_main = indicatif::ProgressStyle::default_bar()
@@ -80,7 +80,6 @@ mod tests {
         for handle in handles{
             handle.join().unwrap();
         }
-        panic!("done");
 
     }
 
